@@ -19,5 +19,5 @@ $ test(var3,'if would be better if I understand what is going on in these predic
 # Obtendran este resultado
 (3, '0.026*"people" + 0.014*"say" + 0.014*"may" + 0.013*"reason" + 0.012*"believe" + 0.011*"evidence" + 0.010*"mean" + 0.009*"fact" + 0.009*"state" + 0.009*"claim"')
 
-# Entiendo es el tercer topico, en el cual tiene esas probabilidades de las palabras que contiene
+# Entiendo que es el tercer topico, en el cual tiene esas probabilidades de las palabras que contiene
 
