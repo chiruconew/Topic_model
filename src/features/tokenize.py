@@ -14,15 +14,14 @@ from nltk.corpus import stopwords
 from spacy.lang.en import English
 
 import nltk
-nltk.download()
+#nltk.download()
 from nltk.corpus import stopwords   
 
 nlp = spacy.load('en_core_web_lg', disable=['parser', 'ner'])
 
 
 def tokenize(documents: List[str]) -> List[List[str]]:
-    document_words = clean_up_text(documents)
-    document_words = list(sentence_to_words(document_words))
+    document_words = list(sentence_to_words(documents))
     document_words = remove_stopwords(document_words)
     document_words = build_bigrams(document_words)
     document_words = lemmatization(nlp, document_words)
@@ -58,7 +57,8 @@ def build_bigrams(data_words: List[List[str]], min_count:int=5,threshold:int=10)
     return [bigram_mod[doc] for doc in data_words]
     
 def build_trigrams(data_words:List[List[str]],min_count:int=5,threshold:int=10) -> List[List[str]]:
-    bigram = core_bigram(data_words, min_count, threshold)
-    trigram = gensim.models.Phrases(bigram[data_words], threshold)  
+    bigram      = core_bigram(data_words, min_count, threshold)
+    bigram_mod  = gensim.models.phrases.Phraser(bigram)
+    trigram     = gensim.models.Phrases(bigram[data_words], threshold)  
     trigram_mod = gensim.models.phrases.Phraser(trigram)
-    return[trigram_mod[ data_words ] for doc in data_words]
+    return[trigram_mod[bigram_mod[doc]] for doc in data_words]
